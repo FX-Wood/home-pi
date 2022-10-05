@@ -32,21 +32,29 @@ in order to send mail. What I ended up using was msmtp and msmtp-mta and then it
 It wasn't clear which packages implement which of the three agents, these were
 the ones I explored:
 
-| package  | apparent use | helpful resource |
-| ------------- | ------------- | ------------ |
-| ssmtp | orphaned project that doesn't work on debian buster (raspbian is based on debian buster) | https://wiki.debian.org/sSMTP |
-| **msmtp, msmtp-mta** | **msmtp implements some sending, but if you need a sendmail implementation, you also need msmtp-mta** | https://superuser.com/questions/1289550/msmtp-vs-msmtp-mta-package-which-one-to-choose |
-| dsb-mailx | implements 'mail' and 'mailx' so for utils that use those it will work. Suggested in the readme for unattended-upgrade | |
-| S-nail | seems like this could be a drop-in replacement for msmtp | https://wiki.archlinux.org/title/S-nail |
-| mailutils |scary because a rando said on ubuntu it includes a beefy mailserver. Seems like overkill? | https://mailutils.org |
+| package  | implements | apparent use | helpful resource |
+| ------------- | ------------- | ------------ | ------------ |
+| ssmtp |???? | orphaned project that doesn't work on debian buster (raspbian is based on debian buster) | https://wiki.debian.org/sSMTP |
+| **msmtp, msmtp-mta** | sendmail | **msmtp implements some sending, but if you need a sendmail implementation, you also need msmtp-mta** | https://superuser.com/questions/1289550/msmtp-vs-msmtp-mta-package-which-one-to-choose |
+| dsb-mailx | mail, mailx | implements 'mail' and 'mailx' so for utils that use those it will work. Suggested in the readme for unattended-upgrade | |
+| S-nail | [several] |seems like this could be a drop-in replacement for msmtp | https://wiki.archlinux.org/title/S-nail |
+| mailutils | [several] | scary because a rando said on ubuntu it includes a beefy mailserver. Seems like overkill? | https://mailutils.org |
 
 This is the post that broke down the barrier to understanding after some 
 banging-of-head-on-wall: https://forums.raspberrypi.com/viewtopic.php?t=318994
 
+This article is a little out of date (can't use 'less secure apps' on google)
+but is pretty good: https://www.howtoraspberry.com/2021/06/how-to-send-mail-from-a-raspberry-pi/
+
+
 ## unattended-upgrade
-this gist was helpful to get an overview of a working unattended-upgrades config: https://github.com/maksimstojkovic/rpi-msmtp-setup
-These chunks of source code was also helpful to decipher which binaries
+see: https://wiki.debian.org/UnattendedUpgrades
+
+This gist was helpful to get an overview of a working unattended-upgrades
+config: [github.com/maksimstojkovic/rpi-msmtp-setup](https://github.com/maksimstojkovic/rpi-msmtp-setup)
+
+These chunks of source code were also helpful to decipher which binaries
 unattended-upgrade was using:
-https://github.com/mvo5/unattended-upgrades/blob/8c62c05444ed505c2ca96a8092ee6be027033af3/unattended-upgrade#L94-L95
-https://github.com/mvo5/unattended-upgrades/blob/8c62c05444ed505c2ca96a8092ee6be027033af3/unattended-upgrade#L1402-L1442
+[main L94-L95](https://github.com/mvo5/unattended-upgrades/blob/8c62c05444ed505c2ca96a8092ee6be027033af3/unattended-upgrade#L94-L95)
+[main L1402-L1442](https://github.com/mvo5/unattended-upgrades/blob/8c62c05444ed505c2ca96a8092ee6be027033af3/unattended-upgrade#L1402-L1442)
 
