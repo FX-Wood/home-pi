@@ -1,0 +1,24 @@
+Unattended-Upgrade::Origins-Pattern {
+        "origin=Debian,codename=${distro_codename}-updates";
+        "origin=Debian,codename=${distro_codename},label=Debian";
+        "origin=Debian,codename=${distro_codename},label=Debian-Security";
+        "origin=Raspbian,codename=${distro_codename},label=Raspbian";
+        "origin=Raspberry Pi Foundation,codename=${distro_codename},label=Raspberry Pi Foundation";
+        "origin=Syncthing,codename=debian,label=Syncthing";
+};
+
+// deprecated in favor of MailReport
+Unattended-Upgrade::MailOnlyOnError "false";
+
+// see  https://github.com/mvo5/unattended-upgrades/blob/5d05cd182325bad80558df53968a06c119f60746/data/50unattended-upgrades.Raspbian#L100 
+Unattended-Upgrade::MailReport "always";
+Unattended-Upgrade::Mail "fxwood2@gmail.com";
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-WithUsers "true";
+Unattended-Upgrade::Automatic-Reboot-Time "3:00";
+
+
+
